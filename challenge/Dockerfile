@@ -4,6 +4,7 @@ FROM python:3.9-slim
 # Install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends iputils-ping && \
+    chmod u+s /usr/bin/ping && \
     rm -rf /var/lib/apt/lists/*
 
 # Set working directory
