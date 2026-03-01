@@ -20,11 +20,9 @@ def ping():
         return "Target cannot be empty!", 400
 
     try:
-        command = f"ping -c 3 {target}"
-        output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT, text=True)
-        return render_template('diagnostic.html', output=output, target=target)
-    except subprocess.CalledProcessError as e:
-        return render_template('diagnostic.html', output=f"Error: {e.output}", target=target)
+        command = f"ping -c 3 -n {target}"
+        process = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        return render_template('diagnostic.html', output=process.stdout, target=target)
     except Exception as e:
         return render_template('diagnostic.html', output=f"Unexpected Error: {str(e)}", target=target)
 
