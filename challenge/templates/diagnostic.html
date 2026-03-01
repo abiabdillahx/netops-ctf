@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net-Diagnostic Tool</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #111111;
+            border: 1px solid #333333;
+            padding: 2.5rem;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666666;
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: #999999;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        input {
+            padding: 0.8rem;
+            margin-bottom: 1.2rem;
+            background: #000000;
+            border: 1px solid #333333;
+            border-radius: 2px;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #ffffff;
+        }
+
+        button {
+            padding: 0.8rem;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #cccccc;
+        }
+
+        .output-wrapper {
+            margin-top: 2rem;
+            width: 100%;
+            border-top: 1px solid #333333;
+            padding-top: 1.5rem;
+        }
+
+        .output-header {
+            font-size: 0.7rem;
+            color: #666666;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        pre {
+            background: #0a0a0a;
+            color: #00ff00;
+            padding: 1rem;
+            border-radius: 2px;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            border-left: 2px solid #333333;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: #444444;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .back-link {
+            margin-top: 1rem;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .back-link:hover { color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Diagnostic Tool</h1>
+        <p class="subtitle">Internal System Connectivity Validator</p>
+        
+        <form action="/api/ping" method="post">
+            <label for="target">Target Host</label>
+            <input type="text" id="target" name="target" placeholder="IP / DOMAIN" value="{{ target if target else '' }}" required autocomplete="off">
+            <button type="submit">Execute Test</button>
+        </form>
+
+        {% if output %}
+        <div class="output-wrapper">
+            <div class="output-header">Result Log</div>
+            <pre>{{ output }}</pre>
+        </div>
+        {% endif %}
+    </div>
+    <a href="/" class="back-link">Return to Corporate Portal</a>
+    <div class="footer">
+        © 2026 NETOPS GLOBAL INFRASTRUCTURE
+    </div>
+</body>
+</html>
